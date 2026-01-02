@@ -1,0 +1,95 @@
+/* Custom Styles for Mentor Approval Page */
+
+.mentor-approval-page {
+    background-color: #f8f9fa; /* ពណ៌ផ្ទៃខាងក្រោយស្រាល */
+    min-height: 100vh;
+}
+
+/* Stats Cards */
+.stats-card {
+    transition: transform 0.2s ease-in-out;
+}
+.stats-card:hover {
+    transform: translateY(-5px);
+}
+.icon-box {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Table Styling */
+.custom-table thead th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.custom-table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.custom-table tbody tr:hover {
+    background-color: #f1f5f9;
+}
+
+.avatar-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Pagination Styling */
+.page-link {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #64748b;
+    transition: all 0.2s;
+}
+
+.page-item.active .page-link {
+    background-color: #4f46e5; /* Primary Color */
+    color: white;
+}
+
+.page-item.disabled .page-link {
+    background-color: transparent;
+    color: #cbd5e1;
+}
+
+.page-link:hover:not(.active) {
+    background-color: #e2e8f0;
+    color: #4f46e5;
+}
+
+/* Modal Animation */
+.modal.show .modal-dialog {
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Hover Lift Effect for Stats Cards */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08) !important;
+}

@@ -1,0 +1,13 @@
+@import "components/dashboard.css";
+@import "components/sidebar.css";
+@import "components/layout.css";
+@import "components/createuser.css";
+@import "components/usermanagement.css";
+@import "components/positionmanagement.css";
+@import "components/bookingmanagement.css";
+@import "components/certificatemanagement.css";
+@import "components/mentorapprove.css";
+@import "components/notificationell.css";
+@import "components/invoicemanagement.css";
+@import "components/header.css";
+@import "components/settings.css";

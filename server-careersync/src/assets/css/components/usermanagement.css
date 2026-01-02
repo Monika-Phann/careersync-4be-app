@@ -1,0 +1,185 @@
+/* =========================================
+   1. MAIN LAYOUT & HEADER
+   ========================================= */
+.user-management-container {
+  padding: 2.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecf1 100%);
+  min-height: 100vh;
+}
+
+.user-management-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.user-management-header h2 { margin: 0; font-size: 2rem; font-weight: 700; color: #1a202c; }
+.user-management-header p { color: #718096; margin-top: 6px; font-size: 0.95rem; }
+
+.user-create-button {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s ease;
+}
+.user-create-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5); }
+
+/* =========================================
+   2. TABLE STYLES
+   ========================================= */
+.user-table-container {
+  background: #fff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  overflow-x: auto;
+}
+
+.user-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.95rem; }
+.user-table th, .user-table td { padding: 16px 12px; text-align: left; vertical-align: middle; }
+.user-table th {
+  background: #f8fafc; color: #4a5568; font-weight: 600; font-size: 0.85rem;
+  text-transform: uppercase; border-bottom: 2px solid #e2e8f0;
+}
+.user-table tbody tr { transition: all 0.2s ease; border-bottom: 1px solid #f1f5f9; }
+.user-table tbody tr:hover { background-color: #f8fafc; }
+.user-table td { color: #2d3748; font-weight: 500; border-bottom: 1px solid #f1f5f9; }
+
+/* =========================================
+   3. BADGE STYLES (Role & Status)
+   ========================================= */
+.user-role-badge, .user-status-badge {
+  display: inline-block; padding: 6px 14px; border-radius: 50px;
+  font-size: 0.75rem; font-weight: 600; text-transform: capitalize;
+  min-width: 80px; text-align: center; color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.user-role-badge.admin { background-color: #4F46E5; }
+.user-role-badge.mentor { background-color: #EC4899; }
+.user-role-badge.user { background-color: #0EA5E9; }
+
+.user-status-badge.active { background-color: #10B981; }
+.user-status-badge.inactive { background-color: #EF4444; }
+.user-status-badge.unknown { background-color: #94A3B8; }
+
+/* =========================================
+   🔥 4. PROFESSIONAL CARRIER BADGES
+   ========================================= */
+.carrier-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px; /* Space between logo and number */
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 5px 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+  transition: transform 0.2s ease;
+  min-width: 150px; /* Consistent width */
+  height: 36px;
+}
+
+.carrier-badge:hover { transform: translateY(-1px); box-shadow: 0 4px 8px rgba(0,0,0,0.06); }
+
+.carrier-logo {
+  width: auto;
+  height: 20px; /* Height constraint for logos */
+  object-fit: contain;
+}
+
+.carrier-text-icon { font-size: 1.2rem; }
+
+.phone-text {
+  font-weight: 700;
+  color: #334155;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+/* Colored Borders for Carriers */
+.carrier-badge.smart { border-left: 4px solid #00C853; }
+.carrier-badge.cellcard { border-left: 4px solid #FF9800; }
+.carrier-badge.metfone { border-left: 4px solid #D32F2F; }
+.carrier-badge.unknown { border-left: 4px solid #94a3b8; }
+
+/* =========================================
+   5. MODAL STYLES (Clean Grid)
+   ========================================= */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background: white; border-radius: 16px; width: 90%; max-width: 550px;
+  max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+  padding: 1.5rem; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; align-items: center;
+}
+
+.modal-body { padding: 2rem; }
+
+/* Modal Header Section */
+.modal-top-section {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+}
+
+.modal-profile-img {
+  width: 100px; height: 100px; border-radius: 50%; object-fit: cover;
+  border: 4px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 1rem;
+}
+
+.modal-profile-placeholder {
+  width: 100px; height: 100px; border-radius: 50%; background: #f3f4f6;
+  display: flex; align-items: center; justify-content: center; font-size: 3rem; margin-bottom: 1rem;
+}
+
+.modal-user-name { margin: 0; font-size: 1.5rem; color: #1e293b; }
+.modal-user-email { color: #64748b; margin: 5px 0 15px 0; }
+.modal-badges { display: flex; gap: 10px; justify-content: center; }
+
+/* Modal Grid */
+.modal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 Columns */
+  gap: 1.5rem;
+}
+
+.grid-item { display: flex; flex-direction: column; gap: 5px; }
+.grid-item.full-width { grid-column: span 2; }
+
+.grid-item label {
+  font-size: 0.75rem; text-transform: uppercase; color: #94a3b8; font-weight: 700; letter-spacing: 0.5px;
+}
+
+.grid-item span { font-weight: 600; color: #334155; font-size: 1rem; }
+
+/* =========================================
+   6. ACTIONS & PAGINATION
+   ========================================= */
+.user-table-actions { display: flex; gap: 8px; }
+.user-action-btn {
+  padding: 8px; width: 36px; height: 36px; border: none; border-radius: 8px;
+  cursor: pointer; background: #f1f5f9; font-size: 1.1rem; transition: all 0.2s ease;
+  display: flex; align-items: center; justify-content: center;
+}
+.user-action-btn:hover { transform: scale(1.1); }
+
+.user-pagination-footer {
+  display: flex; justify-content: space-between; align-items: center; margin-top: 1.5rem; border-top: 1px solid #f1f5f9; padding-top: 1.5rem;
+}
+.user-page-btn {
+  min-width: 36px; height: 36px; border: 1px solid #e2e8f0; background: white; border-radius: 8px; cursor: pointer;
+}
+.user-page-btn:hover:not(:disabled) { background: #f8fafc; border-color: #cbd5e0; }

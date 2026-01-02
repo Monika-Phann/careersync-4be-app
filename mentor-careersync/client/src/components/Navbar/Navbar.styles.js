@@ -1,0 +1,145 @@
+export const NavbarStyles = {
+  appBar: {
+    backgroundColor: '#ffffff',
+    color: '#333333',
+    borderBottom: '1px solid #e0e0e0',
+    position: 'relative',
+    width: '100%',
+  },
+  toolbar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: { xs: '8px 12px', sm: '8px 12px', md: '16px 24px' },
+    minHeight: { xs: '56px', sm: '56px', md: '64px' },
+  },
+  leftSection: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: { xs: '10px', sm: '10px', md: '16px' },
+    minWidth: 0,
+    flex: 1,
+  },
+  menuButton: {
+    color: '#666666',
+    width: 44,
+    height: 44,
+    borderRadius: '10px',
+    transition: 'transform 180ms ease, background-color 180ms ease',
+    '&:hover': {
+      backgroundColor: '#f5f5f5',
+    },
+    '&:active': {
+      transform: 'scale(0.97)',
+    },
+  },
+  mobileLogoWrap: {
+    display: { xs: 'flex', sm: 'flex', md: 'none' },
+    alignItems: 'center',
+  },
+  mobileLogo: {
+    width: '120px',
+    height: 'auto',
+  },
+  logo: {
+    fontWeight: 700,
+    fontSize: '20px',
+    color: '#030C2B',
+    letterSpacing: '0.5px',
+    marginRight: 'auto',
+  },
+  titleContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    flex: 1,
+    minWidth: 0,
+    display: { xs: 'none', sm: 'none', md: 'flex' },
+  },
+  title: {
+    fontWeight: 400,
+    fontSize: '16px',
+    color: '#333333',
+    fontFamily: 'Inter, sans-serif',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  subtitle: {
+    fontWeight: 400,
+    color: '#666666',
+    fontSize: '16px',
+    marginTop: '4px',
+    fontFamily: 'Inter, sans-serif',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  rightSection: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    marginLeft: 'auto',
+  },
+  actionButtonsContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    marginRight: '8px',
+  },
+  iconButton: {
+    color: '#666666',
+    width: 44,
+    height: 44,
+    borderRadius: '10px',
+    transition: 'transform 180ms ease, background-color 180ms ease',
+    '&:hover': {
+      backgroundColor: '#f5f5f5',
+    },
+    '&:active': {
+      transform: 'scale(0.97)',
+    },
+  },
+  profileSection: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    padding: '8px 12px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'background-color 180ms ease, transform 180ms ease',
+    '&:hover': {
+      backgroundColor: '#f5f5f5',
+    },
+    '&:active': {
+      transform: 'scale(0.99)',
+    },
+  },
+  avatar: {
+    width: 40,
+    height: 40,
+    backgroundColor: '#1976d2',
+    color: '#ffffff',
+    fontWeight: 600,
+  },
+  profileInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    display: { xs: 'none', sm: 'none', md: 'flex' },
+  },
+  profileName: {
+    fontWeight: 500,
+    color: '#333333',
+    lineHeight: 1.2,
+  },
+  profileRole: {
+    color: '#666666',
+    fontSize: '12px',
+    lineHeight: 1.2,
+  },
+  dropdownIcon: {
+    fontSize: '20px',
+    color: '#666666',
+  },
+}
+

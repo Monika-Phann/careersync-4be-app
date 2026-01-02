@@ -1,0 +1,142 @@
+/* --- UI Improvements --- */
+.main-content { background-color: #f8f9fa; min-height: 100vh; }
+.header-title { font-size: 1.5rem; font-weight: 700; color: #1a1a1a; }
+.stats-card { background: white; padding: 15px 25px; border-radius: 12px; width: fit-content; min-width: 220px; border: 1px solid #f0f0f0; }
+.table-container { border-radius: 12px; border: 1px solid #f0f0f0; }
+.search-bar { background-color: #f1f3f5; border: none; border-radius: 8px; padding: 10px 15px; }
+
+/* --- Pagination --- */
+.pagination .page-link { color: #6c757d; border: 1px solid #e9ecef; margin: 0 2px; border-radius: 6px !important; padding: 6px 12px; }
+.pagination .page-item.active .page-link { background-color: #0d6efd; border-color: #0d6efd; color: white; }
+
+/* --- Modal Certificate Design --- */
+.certificate-modal-container { min-height: 500px; background-color: white; }
+.cert-left-content { flex: 2.5; position: relative; }
+.cert-right-sidebar { 
+    flex: 1; 
+    background-color: #1c75bc !important; /* Careersync Blue */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 15% 100%, 0% 50%);
+}
+.extra-small { font-size: 10px; }
+.badge-seal {
+    width: 140px; height: 140px;
+    border: 4px double white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* --- THE PRINT FIX --- */
+@media print {
+    body { background-color: white !important; margin: 0; padding: 0; }
+    
+    /* Ensure only the table/report container shows */
+    .no-print, nav, .sidebar, .pagination, .btn, .search-bar, .modal-footer, .modal-header {
+        display: none !important;
+    }
+
+    /* Reset container so it doesn't get cut off */
+    .table-container, .main-content {
+        position: static !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+
+    table { width: 100% !important; border-collapse: collapse !important; }
+    tr { page-break-inside: avoid !important; }
+    thead { display: table-header-group; } /* Repeats header on next page */
+
+    /* Force background colors to print */
+    .text-primary { color: #0d6efd !important; }
+    .table th { background-color: #f8f9fa !important; -webkit-print-color-adjust: exact; }
+    .cert-right-sidebar { -webkit-print-color-adjust: exact; background-color: #1c75bc !important; }
+
+    @page { size: A4 portrait; margin: 15mm; }
+}
+
+.certificate-modal-container { 
+    min-height: 500px; 
+    background-color: white; 
+    display: flex;
+}
+
+.cert-left-content { 
+    flex: 2.5; 
+}
+
+.cert-right-sidebar { 
+    flex: 1; 
+    background-color: #1c75bc !important; /* The Blue color from your logo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* This creates the slanted edge effect */
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 15% 100%, 0% 50%);
+}
+
+.badge-seal {
+    width: 140px; 
+    height: 140px;
+    border: 4px double white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.extra-small { font-size: 10px; }
+
+
+
+/* --- Icon Fix --- */
+.bi-eye {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.bi-eye:hover {
+    transform: scale(1.2);
+    color: #0b5ed7 !important;
+}
+
+/* --- Modal Certificate Structure --- */
+.certificate-modal-container { 
+    min-height: 550px; 
+}
+
+.cert-left-content { 
+    flex: 2.5; 
+}
+
+.cert-right-sidebar { 
+    flex: 1; 
+    background-color: #1c75bc !important; /* Matches CareerSync Blue */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Creates the diagonal cut from your image */
+    clip-path: polygon(15% 0%, 100% 0%, 100% 100%, 15% 100%, 0% 50%);
+}
+
+.badge-seal {
+    width: 140px; height: 140px;
+    border: 4px double white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: white; /* Outer circle color */
+    color: #1c75bc; /* Inner text color */
+}

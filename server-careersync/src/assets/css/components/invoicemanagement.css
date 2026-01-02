@@ -1,0 +1,37 @@
+/* src/assets/css/components/invoicemanagement.css */
+
+/* Pagination Active State */
+.page-item.active .page-link {
+    background-color: #4f46e5 !important; /* ព៌ណ Indigo ស្អាត */
+    border-color: #4f46e5 !important;
+}
+
+/* Hover Effect លើ Table Row */
+.table-hover tbody tr:hover {
+    background-color: #f8fafc !important;
+    transform: scale(1.001);
+    transition: all 0.2s ease;
+}
+
+/* ធ្វើឱ្យក្បាលតារាងមានពណ៌ប្រផេះខ្ចី */
+.table thead th {
+    background-color: #f1f5f9;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+}
+
+/* Card ដែលមាន Shadow */
+.card {
+    transition: transform 0.2s;
+}
+
+.card-stats:hover {
+    transform: translateY(-2px);
+}
+
+/* Input Search Box Focus */
+.form-control:focus {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    border-color: #4f46e5;
+}

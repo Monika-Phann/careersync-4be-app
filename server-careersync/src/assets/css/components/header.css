@@ -1,0 +1,124 @@
+/* --- Admin Header Container --- */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 2rem;
+  background-color: #ffffff;
+  /* ប្រើ Shadow ជំនួស Border ដើម្បីឱ្យមើលទៅមានជម្រៅ (Depth) */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03); 
+  border-bottom: 1px solid #f1f5f9;
+  
+  /* ធ្វើឱ្យ Header នៅជាប់ខាងលើជានិច្ច (Sticky) */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+/* --- Header Title --- */
+.header-title {
+  font-size: 1.1rem;
+  color: #334155;
+  font-weight: 500;
+}
+
+.header-title strong {
+  color: #4f46e5; /* ពណ៌ Indigo (Primary Color) */
+}
+
+/* --- Controls Section (Right Side) --- */
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* --- Notification Bell Button --- */
+.btn-icon {
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: #64748b;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.btn-icon:hover {
+  background-color: #f1f5f9;
+  color: #4f46e5;
+  transform: translateY(-2px); /* ងើបឡើងលើបន្តិចពេលដាក់ Mouse */
+}
+
+/* (Optional) ចំណុចក្រហមលើកណ្ដឹង */
+.btn-icon::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 8px;
+  height: 8px;
+  background-color: #ef4444;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+/* --- Profile Badge (User Info) --- */
+.profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* គម្លាតរវាងរូប និងអក្សរ */
+  padding: 6px 16px 6px 6px; /* Padding ខាងឆ្វេងតូចជាង ដើម្បីឱ្យរូបនៅកៀក */
+  border-radius: 50px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.profile-badge:hover {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Profile Avatar Image --- */
+.profile-avatar {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff; /* ដាក់គែមពណ៌ស */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow លើរូប */
+  transition: transform 0.2s;
+}
+
+.profile-badge:hover .profile-avatar {
+  transform: scale(1.05); /* រូបរីកធំបន្តិចពេល Hover */
+}
+
+/* --- Fallback Icon (ពេលអត់មានរូប) --- */
+.profile-fallback-icon {
+  font-family: sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #fff;
+}
+
+/* --- Role Badge (Text) --- */
+.role-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+  background-color: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}

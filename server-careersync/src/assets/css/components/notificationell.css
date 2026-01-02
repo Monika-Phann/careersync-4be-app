@@ -1,0 +1,165 @@
+/* --- Notification Bell Wrapper --- */
+.notification-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* --- Bell Icon --- */
+.bell-icon {
+  position: relative;
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: transform 0.2s ease;
+  user-select: none;
+}
+
+.bell-icon:hover {
+  transform: scale(1.1);
+}
+
+/* --- Red Badge Count --- */
+.badge-count {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: #ef4444; /* Red */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 2px solid white; /* Makes it pop */
+  min-width: 18px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* --- Dropdown Container --- */
+.notification-dropdown {
+  position: absolute;
+  top: 130%; /* Push it down a bit */
+  right: -10px; /* Align to right edge */
+  width: 320px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(0,0,0,0.05);
+  z-index: 1000;
+  overflow: hidden;
+  border: 1px solid #f3f4f6;
+  animation: slideDown 0.2s ease-out;
+}
+
+/* Animation for smooth opening */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header --- */
+.dropdown-header {
+  padding: 12px 16px;
+  background-color: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-header span {
+  font-weight: 700;
+  color: #1e293b;
+  font-size: 0.95rem;
+}
+
+.dropdown-header button {
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  transition: color 0.2s;
+}
+
+.dropdown-header button:hover {
+  color: #ef4444;
+}
+
+/* --- Body (Scrollable List) --- */
+.dropdown-body {
+  max-height: 350px;
+  overflow-y: auto;
+  scrollbar-width: thin; /* Firefox */
+}
+
+/* Scrollbar Styling */
+.dropdown-body::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.dropdown-body::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+/* --- Notification Item --- */
+.noti-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f1f5f9;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.noti-item:last-child {
+  border-bottom: none;
+}
+
+.noti-item:hover {
+  background-color: #f8fafc;
+}
+
+/* Read vs Unread States */
+.noti-item.unread {
+  background-color: #eff6ff; /* Light Blue for unread */
+  border-left: 4px solid #3b82f6; /* Blue indicator line */
+}
+
+.noti-item.read {
+  background-color: white;
+  opacity: 0.8;
+}
+
+/* --- Content Styling --- */
+.noti-title {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #1e293b;
+  margin: 0;
+}
+
+.noti-msg { 
+  font-size: 0.85rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.noti-time {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  align-self: flex-end; /* Align time to right */
+  margin-top: 4px;
+}
+
+/* --- Empty State --- */
+.no-noti {
+  padding: 30px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.9rem;
+}

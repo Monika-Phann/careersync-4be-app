@@ -1,0 +1,38 @@
+stages:
+  - install
+  - build
+  - test
+
+variables:
+  NODE_ENV: development
+
+# Use Node 24 image
+image: node:24-alpine
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+install_dependencies:
+  stage: install
+  tags:
+    - my-node-agent
+  script:
+    - rm -rf node_modules
+    - npm cache clean --force
+    - npm install --legacy-peer-deps
+  artifacts:
+    paths:
+      - node_modules/
+    expire_in: 1 hour
+
+build_project:
+  stage: build
+  script:
+    - npm run build
+
+test_project:
+  stage: test
+  script:
+    - npm test

@@ -1,0 +1,258 @@
+const bcrypt = require("bcrypt");
+const {
+  User,
+  AccUser,
+  Booking,
+  Certificate,
+  Mentor,
+  Position,
+  Session,
+  ScheduleTimeslot,
+} = require("../models");
+
+const APP_URL =
+  process.env.APP_URL || `http://localhost:${process.env.PORT || 5001}`;
+
+exports.getProfile = async (userId) => {
+  const user = await User.findByPk(userId, {
+    attributes: ["id", "email", "role_name"],
+    include: [
+      {
+        model: AccUser,
+        attributes: [
+          "id",
+          "user_id",
+          "first_name",
+          "last_name",
+          "phone",
+          "gender",
+          "dob",
+          "types_user",
+          "institution_name",
+          "profile_image",
+          "deleted_at",
+          "created_at",
+          "updated_at",
+        ],
+      },
+    ],
+  });
+
+  if (!user) {
+    return null;
+  }
+
+  // Convert to plain object and add full image URL
+  const userData = user.toJSON();
+  if (userData.AccUser && userData.AccUser.profile_image) {
+    userData.AccUser.profile_image_url = `${APP_URL}/uploads/${userData.AccUser.profile_image}`;
+  }
+
+  return userData;
+};
+
+exports.updateProfile = async (userId, data, file) => {
+  // Build update object - only include profile_image if file is provided
+  const updateData = {
+    first_name: data.firstname,
+    last_name: data.lastname,
+    phone: data.phone,
+    gender: data.gender,
+    dob: data.dob || null,
+    types_user: data.currentstatus,
+    institution_name: data.institution,
+  };
+
+  // Only update profile_image if a new file is provided
+  if (file && file.filename) {
+    updateData.profile_image = file.filename;
+    console.log("Updating profile_image with filename:", file.filename);
+  }
+
+  // Update the profile
+  await AccUser.update(updateData, { where: { user_id: userId } });
+
+  // Fetch and return the updated profile with full image URL
+  const updatedProfile = await exports.getProfile(userId);
+  const accUser = updatedProfile.AccUser || {};
+
+  console.log("Updated profile AccUser:", accUser);
+  console.log("Profile image from DB:", accUser.profile_image);
+  console.log("Profile image URL from getProfile:", accUser.profile_image_url);
+
+  // Construct full profile image URL - use profile_image_url if available, otherwise construct it
+  const profileImageUrl =
+    accUser.profile_image_url ||
+    (accUser.profile_image
+      ? `${APP_URL}/uploads/${accUser.profile_image}`
+      : null);
+
+  console.log("Final profile image URL:", profileImageUrl);
+
+  // Return formatted profile data
+  return {
+    id: updatedProfile.id,
+    email: updatedProfile.email,
+    role: updatedProfile.role_name,
+    firstName: accUser.first_name || "",
+    lastName: accUser.last_name || "",
+    phone: accUser.phone || "",
+    dob: accUser.dob || "",
+    gender: accUser.gender || "",
+    status: accUser.types_user || "",
+    institution: accUser.institution_name || "",
+    avatar: profileImageUrl,
+    profileImage: profileImageUrl,
+  };
+};
+
+exports.changePassword = async (userId, { currentPassword, newPassword }) => {
+  const user = await User.findByPk(userId);
+
+  const match = await bcrypt.compare(currentPassword, user.password);
+  if (!match) throw new Error("Current password is incorrect");
+
+  user.password = await bcrypt.hash(newPassword, 12);
+  user.last_password_change = new Date();
+  await user.save();
+};
+
+exports.getBookings = async (userId) => {
+  // First get the AccUser ID
+  const accUser = await AccUser.findOne({
+    where: { user_id: userId },
+  });
+
+  if (!accUser) {
+    return [];
+  }
+
+  return Booking.findAll({
+    where: { acc_user_id: accUser.id },
+    attributes: [
+      "id",
+      "mentor_id",
+      "acc_user_id",
+      "position_id",
+      "session_id",
+      "mentor_name_snapshot",
+      "acc_user_name_snapshot",
+      "position_name_snapshot",
+      "session_price_snapshot",
+      "start_date_snapshot",
+      "end_date_snapshot",
+      "total_amount",
+      "status",
+      "created_at",
+      "updated_at",
+    ],
+    include: [
+      {
+        model: Mentor,
+        as: "mentorUser",
+        attributes: [
+          "id",
+          "first_name",
+          "last_name",
+          "job_title",
+          "company_name",
+          "profile_image",
+        ],
+        required: false,
+        include: [
+          {
+            model: User,
+            attributes: ["email"],
+            required: false,
+          },
+        ],
+      },
+      {
+        model: Position,
+        attributes: ["id", "position_name"],
+        required: false,
+      },
+      {
+        model: Session,
+        attributes: ["id", "location_name"],
+        required: false,
+      },
+      {
+        model: ScheduleTimeslot,
+        as: "ScheduleTimeslot",
+        attributes: ["id", "start_time", "end_time"],
+        required: false,
+      },
+    ],
+    order: [["created_at", "DESC"]],
+  });
+};
+
+// exports.getCertificates = async (userId) => {
+//   // Resolve AccUser
+//   const accUser = await AccUser.findOne({
+//     where: { user_id: userId },
+//     attributes: ["id"]
+//   });
+
+//   if (!accUser) return [];
+
+//   // 🔴 NO INCLUDES — BASE QUERY ONLY
+//   return Certificate.findAll({
+//     where: { acc_user_id: accUser.id }
+//   });
+// };
+
+exports.getCertificates = async (userId) => {
+  try {
+    const accUser = await AccUser.findOne({
+      where: { user_id: userId },
+      attributes: ["id"],
+    });
+
+    if (!accUser) return [];
+
+    return await Certificate.findAll({
+      where: { acc_user_id: accUser.id },
+      include: [
+        {
+          model: Booking,
+          attributes: [
+            "id",
+            "mentor_name_snapshot",
+            "acc_user_name_snapshot",
+            "position_name_snapshot",
+            "start_date_snapshot",
+            "end_date_snapshot"
+          ],
+          required: false,
+        },
+        {
+          model: Position,
+          attributes: ["id", "position_name"],
+          required: false,
+        },
+        {
+          model: Mentor,
+          as: "Issuer",
+          attributes: ["id", "first_name", "last_name"],
+          required: false,
+        },
+        {
+          model: Mentor,
+          attributes: ["id", "first_name", "last_name"],
+          required: false,
+        },
+        {
+          model: AccUser,
+          attributes: ["id", "first_name", "last_name"],
+          required: false,
+        },
+      ],
+      order: [["created_at", "DESC"]],
+    });
+  } catch (error) {
+    console.error("Error fetching certificates:", error);
+    throw error;
+  }
+};

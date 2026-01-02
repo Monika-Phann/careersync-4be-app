@@ -1,0 +1,30 @@
+name: Deploy Frontend
+
+on:
+  push:
+    branches:
+      - adminClient  # ✅ ត្រូវប្រាកដថាឈ្មោះនេះត្រូវ
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.SSH_KEY }}
+        script: |
+          cd /var/www/careersync/frontend
+          
+          # 🔥 កែត្រង់នេះ៖ ឱ្យវាចាប់យកកូដថ្មីពី adminClient
+          git fetch --all
+          git reset --hard origin/adminClient
+          
+          # Build ឡើងវិញ
+          npm install
+          npm run build
+          
+          echo "✅ Frontend Deployed Successfully!"
