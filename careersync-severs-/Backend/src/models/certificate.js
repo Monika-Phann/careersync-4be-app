@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
   });
 
   Certificate.associate = (models) => {
-    Certificate.belongsTo(models.Booking, { foreignKey: 'booking_id' });
+    Certificate.belongsTo(models.Booking, { foreignKey: 'booking_id', constraints: false });
     Certificate.belongsTo(models.Position, { foreignKey: 'position_id' });
     Certificate.belongsTo(models.AccUser, { foreignKey: 'acc_user_id' });
     Certificate.belongsTo(models.Mentor, { foreignKey: 'mentor_id' });

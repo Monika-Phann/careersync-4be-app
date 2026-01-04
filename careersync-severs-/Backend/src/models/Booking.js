@@ -40,7 +40,7 @@ module.exports = (sequelize) => {
   });
 
   Booking.associate = (models) => {
-    Booking.belongsTo(models.ScheduleTimeslot, { foreignKey: 'schedule_timeslot_id', as: 'ScheduleTimeslot' });
+    Booking.belongsTo(models.ScheduleTimeslot, { foreignKey: 'schedule_timeslot_id', as: 'ScheduleTimeslot', constraints: false });
     Booking.belongsTo(models.Mentor, { foreignKey: 'mentor_id', as: 'mentorUser' });
     Booking.belongsTo(models.AccUser, { foreignKey: 'acc_user_id', as: 'menteeUser' });
     Booking.belongsTo(models.Position, { foreignKey: 'position_id' });
@@ -48,7 +48,7 @@ module.exports = (sequelize) => {
 
     Booking.hasOne(models.Payment, { foreignKey: 'booking_id', onDelete: 'CASCADE' });
     Booking.hasOne(models.Certificate, { foreignKey: 'booking_id', onDelete: 'SET NULL' });
-    Booking.hasOne(models.ScheduleTimeslot, { foreignKey: 'booking_id' });
+    Booking.hasOne(models.ScheduleTimeslot, { foreignKey: 'booking_id', constraints: false });
   };
 
   return Booking;

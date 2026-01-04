@@ -1,7 +1,7 @@
 module.exports = {
   // 🔹 User
   UserRole: ["admin", "mentor", "acc_user"],
-  AccountStatus: ["unverified", "verified", "blocked"],
+  AccountStatus: ["pending", "unverified", "verified", "blocked"],
   // 🔹 Mentor
   Gender: ["male", "female", "other"],
   ApprovalStatus: ["pending", "approved", "rejected"],

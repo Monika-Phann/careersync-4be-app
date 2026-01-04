@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
   });
 
   Payment.associate = (models) => {
-    Payment.belongsTo(models.Booking, { foreignKey: 'booking_id', onDelete: 'CASCADE' });
+    Payment.belongsTo(models.Booking, { foreignKey: 'booking_id', onDelete: 'CASCADE', constraints: false });
     Payment.hasOne(models.Invoice, { foreignKey: 'payment_id', onDelete: 'CASCADE' });
   };
 

@@ -31,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
       is_booked: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
+      },
+
+      booking_id: {
+        type: DataTypes.UUID,
+        allowNull: true  // Optional - will be set when booking is created
       }
     },
     {
@@ -51,7 +56,8 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     ScheduleTimeslot.belongsTo(models.Booking, {
-      foreignKey: "booking_id"
+      foreignKey: "booking_id",
+      constraints: false  // Don't create FK constraint during sync (handles circular dependency)
     });
   };
 
