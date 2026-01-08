@@ -274,7 +274,6 @@ function AllAvailableTimes() {
                         startIcon={<EditIcon />}
                         onClick={() => handleEdit(timeSlot)}
                         sx={AllAvailableTimesStyles.editButton}
-                        disabled={timeSlot.status === 'BOOKED'}
                       >
                         Edit
                       </Button>
@@ -290,7 +289,6 @@ function AllAvailableTimes() {
                         }
                         onClick={() => handleDelete(timeSlot)}
                         sx={AllAvailableTimesStyles.deleteButton}
-                        disabled={timeSlot.status === 'BOOKED'}
                       >
                         Delete
                       </Button>

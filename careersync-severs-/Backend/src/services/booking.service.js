@@ -52,10 +52,8 @@ exports.createBooking = async (userId, data) => {
     status: "pending"
   });
 
-  // 5️⃣ Lock slot
-  slot.is_booked = true;
-  slot.booking_id = booking.id;
-  await slot.save();
+  // 5️⃣ Delete the schedule automatically when booked (instead of marking as booked)
+  await slot.destroy();
 
   return booking;
 };

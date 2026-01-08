@@ -86,10 +86,12 @@ exports.deleteTimeslot = async (mentorUserId, timeslotId) => {
   if (!mentor) throw new Error("Mentor not found");
 
   const timeslot = await ScheduleTimeslot.findOne({
-    where: { id: timeslotId, mentor_id: mentor.id, booking_id: null }
+    where: { id: timeslotId, mentor_id: mentor.id }
   });
-  if (!timeslot) throw new Error("Timeslot not found, not yours, or already booked");
+  if (!timeslot) throw new Error("Timeslot not found or not yours");
 
+  // Allow deletion even if booked - booked schedules should be automatically deleted anyway
+  // but allow manual deletion for any schedule owned by the mentor
   await timeslot.destroy();
 };
 
@@ -103,7 +105,8 @@ exports.getAllMentorTimeslots = async (mentorUserId) => {
 
   return await ScheduleTimeslot.findAll({
     where: { 
-      mentor_id: mentor.id
+      mentor_id: mentor.id,
+      is_booked: false  // Only show available (non-booked) schedules
     },
     include: [
       {
